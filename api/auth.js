@@ -24,7 +24,16 @@ export default function handler(req, res) {
             const token = jwt.sign({ userId: newUser.userId, email: newUser.email }, JWT_SECRET, { expiresIn: "1h" });
 
             res.setHeader("Set-Cookie", `auth_token=${token}; HttpOnly; Path=/`);
-            return res.json({ message: "User registered", user: newUser });
+            return res.json({
+                statusCode: 0,
+                messages: ["User registered"],
+                userData: {
+                    userId: newUser.userId,
+                    email: newUser.email,
+                    isAuth: true,
+                    users: users
+                }
+            });
         }
 
         if (type === "login") {
@@ -37,7 +46,16 @@ export default function handler(req, res) {
             const token = jwt.sign({ userId: user.userId, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
 
             res.setHeader("Set-Cookie", `auth_token=${token}; HttpOnly; Path=/`);
-            return res.json({ message: "Login successful", user });
+            return res.json({
+                statusCode: 0,
+                messages: ["User registered"],
+                userData: {
+                    userId: user.userId,
+                    email: user.email,
+                    isAuth: true,
+                    users: users
+                }
+            });
         }
     }
 

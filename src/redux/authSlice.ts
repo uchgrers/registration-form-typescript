@@ -46,6 +46,7 @@ const authSlice = createSlice({
             state.pending = true
         })
         builder.addCase(registerUser.fulfilled, (state, action) => {
+            console.log(action.payload)
             if (action.payload.statusCode === 0) {
                 state.userId = action.payload.userData.userId
                 state.isAuth = action.payload.userData.isAuth

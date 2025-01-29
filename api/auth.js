@@ -9,16 +9,11 @@ export default async function handler(req, res) {
     if (req.method !== "POST") {
         return res.json({
             statusCode: 1,
-            messages: ["Method Not Allowed"],
-            userData: {}
+            messages: ["Method Not Allowed"]
         })
     }
 
     const { type, email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).json({ message: "Email and password are required" });
-    }
 
     if (type === "register") {
         if (users.find((u) => u.email === email)) {
@@ -61,7 +56,10 @@ export default async function handler(req, res) {
         const user = users.find((u) => u.email === email);
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(400).json({ message: "Invalid email or password" });
+            return res.json({
+                statusCode: 1,
+                messages: ["Invalid email or password"]
+            });
         }
 
         const token = jwt.sign({ userId: user.userId, email: user.email }, JWT_SECRET, { expiresIn: "1h" });

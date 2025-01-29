@@ -1,6 +1,10 @@
 import { serialize } from "cookie";
 import { users } from "./data";
 
+if (!globalThis.users) {
+    globalThis.users = []; // Инициализируем пользователей глобально
+}
+
 export default function handler(req, res) {
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method Not Allowed" });

@@ -2,6 +2,10 @@ import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { users } from "./data";
 
+if (!globalThis.users) {
+    globalThis.users = []; // Инициализируем пользователей глобально
+}
+
 const JWT_SECRET = "jwt_secret";
 
 export default function handler(req, res) {

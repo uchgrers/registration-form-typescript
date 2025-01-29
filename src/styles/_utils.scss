@@ -1,0 +1,14 @@
+@import "media";
+
+.hiddenMobile {
+  @include mobile-s {
+    display: none !important;
+    width: 0;
+  }
+}
+
+.visibleMobile {
+  @include mobile-s {
+    display: flex !important;
+  }
+}

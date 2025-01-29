@@ -1,0 +1,35 @@
+@import "src/styles/media";
+
+.form {
+  height: 500px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    & label {
+      padding-inline: 10px;
+    }
+  }
+
+  &__errorMessage {
+    padding-inline: 10px;
+    color: red;
+    font-size: 14px;
+
+    @include mobile-s {
+      font-size: 12px;
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,11 @@
+@import "src/styles/media";
+
+.message {
+  font-size: 14px;
+  padding-inline: 10px;
+  color: red;
+
+  @include mobile-s {
+    font-size: 12px;
+  }
+}

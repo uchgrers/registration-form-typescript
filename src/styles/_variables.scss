@@ -1,0 +1,22 @@
+@import "media";
+
+$container-width: 550px;
+$container-padding-x: 40px;
+
+:root {
+  --color-dark: #191A23;
+  --color-light: #FFFFFF;
+  --color-light-beige: #fdf0d5;
+  --color-accent: #4879d5;
+
+  --border: 1px solid var(--color-dark);
+  --border-radius: 14px;
+
+  --font-family-base: 'Nunito', sans-serif;
+
+  --input-height: 50px;
+  --header-height: 80px;
+
+  --opacity: 0.5;
+  --transition-duration: 0.2s;
+}

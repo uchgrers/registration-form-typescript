@@ -10,6 +10,7 @@
     "cookie-parser": "^1.4.7",
     "cra-template-typescript": "1.2.0",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",

@@ -11,12 +11,12 @@ export default function handler(req, res) {
 
     const token = req.cookies.auth_token;
 
-    if (!auth_token) {
+    if (!token) {
         return res.status(401).json({ message: "Unauthorized: No token provided" });
     }
 
     try {
-        const decoded = jwt.verify(auth_token, JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET);
         const currentUser = users.find((u) => u.userId === decoded.userId);
 
         if (!currentUser) {

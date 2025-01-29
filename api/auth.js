@@ -7,7 +7,11 @@ const JWT_SECRET = "jwt_secret";
 
 export default async function handler(req, res) {
     if (req.method !== "POST") {
-        return res.status(405).json({ message: "Method Not Allowed" });
+        return res.json({
+            statusCode: 1,
+            messages: ["Method Not Allowed"],
+            userData: {}
+        })
     }
 
     const { type, email, password } = req.body;
@@ -18,7 +22,10 @@ export default async function handler(req, res) {
 
     if (type === "register") {
         if (users.find((u) => u.email === email)) {
-            return res.status(400).json({ message: "Email is already taken" });
+            return res.status(400).json({
+                statusCode: 1,
+                messages: ["Email is already taken"]
+            });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -40,7 +47,14 @@ export default async function handler(req, res) {
             path: "/"
         }));
 
-        return res.json({ userId: newUser.userId, email: newUser.email, isAuth: true });
+        return res.json({
+            userData: {
+                userId: newUser.userId,
+                email: newUser.email,
+                isAuth: true,
+            },
+            statusCode: 0
+        });
     }
 
     if (type === "login") {
@@ -60,7 +74,14 @@ export default async function handler(req, res) {
             path: "/"
         }));
 
-        return res.json({ userId: user.userId, email: user.email, isAuth: true });
+        return res.json({
+            userData: {
+                userId: user.userId,
+                email: user.email,
+                isAuth: true,
+            },
+            statusCode: 0
+        });
     }
 
     res.status(400).json({ message: "Invalid request type" });

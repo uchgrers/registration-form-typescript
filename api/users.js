@@ -9,7 +9,7 @@ export default function handler(req, res) {
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const { auth_token } = cookie.parse(req.headers.cookie || "");
+    const token = req.cookies.auth_token;
 
     if (!auth_token) {
         return res.status(401).json({ message: "Unauthorized: No token provided" });

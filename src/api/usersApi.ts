@@ -3,7 +3,7 @@ import {UsersType} from "../types";
 
 export const usersApi = {
     getUsers(): Promise<UsersType> {
-        return baseRequestParams.get('/users')
+        return baseRequestParams.get('/registrationFormApi')
             .then(response => response.data)
     },
 }

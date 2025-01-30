@@ -3,11 +3,11 @@ import {LogoutUserResponseType, RegisterUserResponseType, RegisterUserType} from
 
 export const authApi = {
     registerUser(data: RegisterUserType): Promise<RegisterUserResponseType> {
-        return baseRequestParams.post('/auth', data)
+        return baseRequestParams.post('/registrationFormApi', data)
             .then(response => response.data)
     },
     logoutUser(userId: string | undefined): Promise<LogoutUserResponseType> {
-        return baseRequestParams.post('/logout',{userId: userId})
+        return baseRequestParams.post('/registrationFormApi',{userId: userId})
             .then(response => response.data)
     }
 }

@@ -43,7 +43,7 @@ async function handleAuth(req, res) {
 
     if (type === "register") {
         if (users.find(u => u.email === email)) {
-            return res.status(400).json({
+            return res.json({
                 statusCode: 1,
                 messages: ["Email is already taken"]
             });

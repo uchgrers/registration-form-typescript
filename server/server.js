@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 const createResponse = (statusCode, messages = [], userData = {}) => ({ statusCode, messages, userData });
 
-app.post('/auth', async (req, res) => {
+app.post('/registrationFormApi/auth', async (req, res) => {
     const { type, email, password } = req.body;
 
     if (type === 'register') {
@@ -80,14 +80,14 @@ app.post('/auth', async (req, res) => {
     }
 });
 
-app.post('/logout', (req, res) => {
+app.post('/registrationFormApi/logout', (req, res) => {
     const user = users.find(u => u.userId === req.body.userId)
     user.isAuth = false
     res.clearCookie('auth_token');
     res.json({ message: 'Logout successful' });
 });
 
-app.get('/users', (req, res) => {
+app.get('/registrationFormApi/users', (req, res) => {
     const token = req.cookies.auth_token;
 
     if (!token) {

@@ -141,10 +141,11 @@ async function handleLogout(req, res) {
 
 // 🔹 Получение пользователей
 async function handleGetUsers(req, res) {
-    console.log(req.cookies)
-    console.log(req.cookie)
-    const cookies = cookie.parse(req.headers.cookie || ""); // ✅ Исправленный парсинг куки
-    const token = cookies.auth_token;
+    // console.log(req.cookies)
+    // console.log(req.cookie)
+    // const cookies = cookie.parse(req.headers.cookie || ""); // ✅ Исправленный парсинг куки
+    // const token = cookies.auth_token;
+    const token = req.cookies.auth_token;
 
     if (!token) {
         return res.status(401).json({ message: "Unauthorized: No token provided" });

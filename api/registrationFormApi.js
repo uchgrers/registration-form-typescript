@@ -25,6 +25,7 @@ export default async function handler(req, res) {
             return handleLogout(req, res);
         }
     } else if (req.method === 'GET') {
+        console.log(req)
         return handleGetUsers(req, res);
     }
 

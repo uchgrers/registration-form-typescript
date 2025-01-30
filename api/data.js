@@ -1,1 +1,1 @@
-export const users = global.users = global.users || [];
+// export const users = global.users = global.users || [];

@@ -1,20 +1,18 @@
 import Redis from "ioredis";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
-import cookie from "cookie";
 
-const redis = new Redis(process.env.REDIS_URL); // Подключаем Redis
+const redis = new Redis(process.env.REDIS_URL);
 const JWT_SECRET = "jwt_secret";
 
 export default async function handler(req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "https://registration-form-typescript.vercel.app");  // Замените на URL фронтенда
+    res.setHeader("Access-Control-Allow-Origin", "https://registration-form-typescript.vercel.app");
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
     if (req.method === "OPTIONS") {
-        // Ответ на предварительный запрос (OPTIONS)
         return res.status(200).end();
     }
 
@@ -25,30 +23,12 @@ export default async function handler(req, res) {
             return handleLogout(req, res);
         }
     } else if (req.method === 'GET') {
-        console.log(req)
         return handleGetUsers(req, res);
     }
-
-
-
-    // const { method, url } = req;
-    //
-    // if (url.startsWith("/api/registrationFormApiFolder/auth") && method === "POST") {
-    //     return handleAuth(req, res);
-    // }
-    //
-    // if (url.startsWith("/api/registrationFormApiFolder/logout") && method === "POST") {
-    //     return handleLogout(req, res);
-    // }
-    //
-    // if (url.startsWith("/api/registrationFormApiFolder/users") && method === "GET") {
-    //     return handleGetUsers(req, res);
-    // }
 
     res.status(404).json({ message: "Not Found" });
 }
 
-// 🔹 Регистрация и логин
 async function handleAuth(req, res) {
     const { type, email, password } = req.body;
 
@@ -64,7 +44,7 @@ async function handleAuth(req, res) {
 
         const newUser = { userId: users.length + 1, email, password, isAuth: true };
         users.push(newUser);
-        await redis.set("users", JSON.stringify(users)); // ✅ Сохраняем в Redis
+        await redis.set("users", JSON.stringify(users));
 
         const token = jwt.sign({ userId: newUser.userId, email: newUser.email }, JWT_SECRET, { expiresIn: "1h" });
 
@@ -117,7 +97,6 @@ async function handleAuth(req, res) {
     }
 }
 
-// 🔹 Выход (очищаем куки и обновляем Redis)
 async function handleLogout(req, res) {
     let users = JSON.parse(await redis.get("users")) || [];
     const { userId } = req.body;
@@ -125,7 +104,7 @@ async function handleLogout(req, res) {
 
     if (user) {
         user.isAuth = false;
-        await redis.set("users", JSON.stringify(users)); // ✅ Сохраняем изменения
+        await redis.set("users", JSON.stringify(users));
     }
 
     res.setHeader("Set-Cookie", serialize("auth_token", "", {
@@ -139,12 +118,7 @@ async function handleLogout(req, res) {
     return res.json({ message: "Logout successful" });
 }
 
-// 🔹 Получение пользователей
 async function handleGetUsers(req, res) {
-    // console.log(req.cookies)
-    // console.log(req.cookie)
-    // const cookies = cookie.parse(req.headers.cookie || ""); // ✅ Исправленный парсинг куки
-    // const token = cookies.auth_token;
     const token = req.cookies.auth_token;
 
     if (!token) {

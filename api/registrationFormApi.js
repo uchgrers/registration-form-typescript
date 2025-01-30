@@ -20,15 +20,15 @@ export default async function handler(req, res) {
 
     const { method, url } = req;
 
-    if (url.startsWith("/api/registrationFormApi/auth") && method === "POST") {
+    if (url.startsWith("/auth") && method === "POST") {
         return handleAuth(req, res);
     }
 
-    if (url.startsWith("/api/registrationFormApi/logout") && method === "POST") {
+    if (url.startsWith("/logout") && method === "POST") {
         return handleLogout(req, res);
     }
 
-    if (url.startsWith("/api/registrationFormApi/users") && method === "GET") {
+    if (url.startsWith("/users") && method === "GET") {
         return handleGetUsers(req, res);
     }
 

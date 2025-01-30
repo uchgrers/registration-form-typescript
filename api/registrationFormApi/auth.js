@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
-import { users } from "./data";
+import { users } from "../data";
 
 if (!globalThis.users) {
     globalThis.users = []; // Инициализируем пользователей глобально

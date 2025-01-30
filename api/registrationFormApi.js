@@ -8,7 +8,7 @@ const JWT_SECRET = "jwt_secret";
 
 export default async function handler(req, res) {
 
-    res.setHeader("Access-Control-Allow-Origin", "https://registration-form-typescript-git-master-uchgrers-projects.vercel.app");  // Замените на URL фронтенда
+    res.setHeader("Access-Control-Allow-Origin", "https://registration-form-typescript.vercel.app");  // Замените на URL фронтенда
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");

@@ -7,6 +7,17 @@ const redis = new Redis(process.env.REDIS_URL); // Подключаем Redis
 const JWT_SECRET = "jwt_secret";
 
 export default async function handler(req, res) {
+
+    res.setHeader("Access-Control-Allow-Origin", "https://registration-form-typescript-git-master-uchgrers-projects.vercel.app");  // Замените на URL фронтенда
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    if (req.method === "OPTIONS") {
+        // Ответ на предварительный запрос (OPTIONS)
+        return res.status(200).end();
+    }
+
     const { method, url } = req;
 
     if (url.startsWith("/api/registrationFormApi/auth") && method === "POST") {

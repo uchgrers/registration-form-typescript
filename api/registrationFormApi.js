@@ -18,19 +18,31 @@ export default async function handler(req, res) {
         return res.status(200).end();
     }
 
-    const { method, url } = req;
-
-    if (url.startsWith("/api/registrationFormApiFolder/auth") && method === "POST") {
-        return handleAuth(req, res);
-    }
-
-    if (url.startsWith("/api/registrationFormApiFolder/logout") && method === "POST") {
-        return handleLogout(req, res);
-    }
-
-    if (url.startsWith("/api/registrationFormApiFolder/users") && method === "GET") {
+    if (req.method === 'POST') {
+        if (req.body.type === 'register' || req.body.type === 'login') {
+            return handleAuth(req, res);
+        } else {
+            return handleLogout(req, res);
+        }
+    } else if (req.method === 'GET') {
         return handleGetUsers(req, res);
     }
+
+
+
+    // const { method, url } = req;
+    //
+    // if (url.startsWith("/api/registrationFormApiFolder/auth") && method === "POST") {
+    //     return handleAuth(req, res);
+    // }
+    //
+    // if (url.startsWith("/api/registrationFormApiFolder/logout") && method === "POST") {
+    //     return handleLogout(req, res);
+    // }
+    //
+    // if (url.startsWith("/api/registrationFormApiFolder/users") && method === "GET") {
+    //     return handleGetUsers(req, res);
+    // }
 
     res.status(404).json({ message: "Not Found" });
 }

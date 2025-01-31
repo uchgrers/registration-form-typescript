@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Registration Form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Описание проекта
+Форма регистрации и входа пользователей. Приложение включает серверную часть, реализованную на **Express.js**. Пользователь остается авторизованным после перезагрузки страницы благодаря использованию **JWT**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Функционал
+- Регистрация/авторизация пользователя.
+- Регистрация пользователя через cookies при первом подключении.
+- навигация авторизованного пользователя на главную страницу.
+- Хранение данных на серверной стороне (для деплояна **Vercel** использованы serverless functions, а также хранилище на **Redis**).
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Используемые технологии
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Frontend
+- React
+- Redux Toolkit
+- TypeScript
+- SCSS
 
-### `npm test`
+### Backend
+- Node.js
+- Express.js
+- Cookies для авторизации
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Сервисы и инструменты
+- Vercel + Redis (для деплоя)
+- Git/GitHub
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Демо
+[Посмотреть проект](https://registration-form-typescript.vercel.app)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Установка и запуск
 
-### `npm run eject`
+### Frontend
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Backend
+cd server ->
+node server
